@@ -72,5 +72,3 @@ comparing string in kotlin
 SharedPreference
 
 데이터를 파일로 저장한다
-
-class 를 따로 만들어주어야함.
