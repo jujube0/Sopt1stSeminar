@@ -72,3 +72,4 @@ comparing string in kotlin
 SharedPreference
 
 데이터를 파일로 저장한다
+getSharedPreferences() can only be called after onCreate() has been called on an Activity.
