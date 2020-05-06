@@ -73,3 +73,44 @@ SharedPreference
 
 데이터를 파일로 저장한다
 getSharedPreferences() can only be called after onCreate() has been called on an Activity.
+
+
+**
+2020-05-06 추가
+## SharedPreferences
+
+데이터를 영구저장하는 방법. app에 포함되는 데이터 파일을 디바이스에 (key, value) 형태로 저장한다. 
+
+* [코틀린에서는 변수 생성과 동시에 get/set method 설정 가능하다](https://thdev.tech/androiddev/2017/02/14/Getter-and-Setter/)
+  ## Android Application class
+1. Activity 간 공동으로 이용 가능한 공유 클래스
+2. 안드로이드 앱이 시작할 때 가장 먼저 호출된다.
+3. Application class를 상속해야한다.
+4. 매서드로도 이용 가능. 
+
+class 를 생성한 후, AndroidManifest.xml의 Application 태그에 name 속성으로 추가해야한다.
+android:name=".Application"
+
+onCreate() 어플리케이션이 생성될 때 호출된다. 액티비티나 서비스보다 항상 먼저 호출
+onTerminate() : 어프리케이션 객체와 모든 컴포넌트가 종료될 때 호출. but 항상 발생하진 않음. 종료 처리할 때만 사용.
+onLowMemory() : 시스템이 메모리 리소스가 부족할 때 호출
+
+  ## application context
+context> 현재 사용되는 application(or activity)에 대한 포괄적인 정보를 지니고 있는 객체
+
+
+종류> ApplicationContext와 ActivityContext
+Application context는 어플리케이션 자체의 생명주기에 영향을 받는다. 
+현재 context와 분리된 어떤 context가 필요하거나, 현재 activity scope을 벗어난 작업을 할 때?
+대부분의 GUI(화면, view 등) 작업은 불가능하다. (toast는 가능. 자신만의 윈도우를 형성하기 때문)
+
+activity context는 마찬가지로 액티비티의 생명주기와 함께 작동하므로 onDestroy()와 함께 사용한다. 
+
+`LoginActivity.this` though its referring to your own class which extends Activity class but the base class (Activity) also extends Context class, so it can be used to offer activity context.  
+`getApplication()` though its referring to Application object but the Application class extends Context class, so it can be used to offer application context.  
+`getApplicationContext()` offers application context.  
+`getBaseContext()` offers activity context.  
+  
+출처: [http://dev.youngkyu.kr/36](http://dev.youngkyu.kr/36) [조영규의 블로그]
+
+activity와 application class들도 모두 context class를 상속 받았다는 것. loginActivity.this는 this에 해당하는 LoginActivity instance가 parameter로 전달되고, 이것은 context를 상속받았기 때문에 context이기에 아무 문제 없이 작동.
