@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 
 const val PREFERENCES_NAME = "login_preference"
 const val DEFAULT_VALUE_STRING = ""
-class PreferenceManager {
+class PreferenceManager{
 
     fun getPreference(context:Context) : SharedPreferences{
         return context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)

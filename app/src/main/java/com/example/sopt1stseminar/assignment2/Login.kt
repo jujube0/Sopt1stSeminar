@@ -7,12 +7,12 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.sopt1stseminar.R
 import com.example.sopt1stseminar.assignment1.MainActivity
+import com.example.sopt1stseminar.development1.App
 import com.example.sopt1stseminar.development1.PreferenceManager
 import kotlinx.android.synthetic.main.activity_login.*
 
 const val GET_ID_PW = 1
 class Login : AppCompatActivity() {
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +27,8 @@ class Login : AppCompatActivity() {
             }else{
                 val id = et_id.text.toString()
                 val pw = et_pwd.text.toString()
-                saveIdPw(id,pw)
+//                saveIdPw(id,pw)
+                newSaveIdPw(id,pw)
                 sendToMain()
             }
 
@@ -37,27 +38,38 @@ class Login : AppCompatActivity() {
             startActivityForResult(Intent(this, Register::class.java), GET_ID_PW)
         }
     }
-    //SharedPreference에 저장
-    fun saveIdPw(id:String,pw:String){
-        PreferenceManager().setString(this, "id", id)
-        PreferenceManager().setString(this, "pw", pw)
-    }
-    //SharedPreference로부터 로그인 기록을 가져오면 true, 로그인 기록이 없으면 false
-    fun getIdPw():Boolean{
-        val id = PreferenceManager().getString(this, "id")
-        val pw = PreferenceManager().getString(this, "pw")
-        return !id.equals("")&&!pw.equals("")
-    }
+//    //SharedPreference에 저장
+//    fun saveIdPw(id:String,pw:String){
+//        PreferenceManager().setString(this, "id", id)
+//        PreferenceManager().setString(this, "pw", pw)
+//    }
+//    //SharedPreference로부터 로그인 기록을 가져오면 true, 로그인 기록이 없으면 false
+//    fun getIdPw():Boolean{
+//        val id = PreferenceManager().getString(this, "id")
+//        val pw = PreferenceManager().getString(this, "pw")
+//        return !id.equals("")&&!pw.equals("")
+//    }
     // main화면으로 보내기
     fun sendToMain(){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
+
+    fun newSaveIdPw(id:String, pw:String){
+        App.prefs.id=id
+        App.prefs.pw=pw
+    }
+    //로그인기록 가져오면 true 없으면 pw
+    fun hasIdPw():Boolean{
+        val id = App.prefs.id
+        val pw = App.prefs.pw
+        return !id.equals("")&&!pw.equals("")
+    }
     //자동로그인
     override fun onStart() {
         super.onStart()
-       if(getIdPw()){
+       if(hasIdPw()){
            sendToMain()
            Toast.makeText(this, "자동로그인되었습니다", Toast.LENGTH_SHORT).show()
        }

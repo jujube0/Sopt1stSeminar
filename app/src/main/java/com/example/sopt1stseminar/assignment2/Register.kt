@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.sopt1stseminar.R
+import com.example.sopt1stseminar.development1.App
 import com.example.sopt1stseminar.development1.PreferenceManager
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -39,8 +40,10 @@ class Register : AppCompatActivity() {
         val intent : Intent = getIntent()
         intent.putExtra("id",id)
         intent.putExtra("pw", pw)
-        PreferenceManager().setString(this,"id",id)
-        PreferenceManager().setString(this,"pw",pw)
+//        PreferenceManager().setString(this,"id",id)
+//        PreferenceManager().setString(this,"pw",pw)
+        App.prefs.id=id
+        App.prefs.pw=pw
         setResult(Activity.RESULT_OK, intent)
 
     }
