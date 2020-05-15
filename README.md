@@ -89,7 +89,7 @@ getSharedPreferences() can only be called after onCreate() has been called on an
 4. 매서드로도 이용 가능. 
 
 class 를 생성한 후, AndroidManifest.xml의 Application 태그에 name 속성으로 추가해야한다.
-android:name=".Application"
+android:name=".name"
 
 onCreate() 어플리케이션이 생성될 때 호출된다. 액티비티나 서비스보다 항상 먼저 호출
 onTerminate() : 어프리케이션 객체와 모든 컴포넌트가 종료될 때 호출. but 항상 발생하진 않음. 종료 처리할 때만 사용.
